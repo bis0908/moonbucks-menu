@@ -39,15 +39,26 @@ function App() {
   $("#espresso-menu-form").addEventListener("submit", (e) => {
     e.preventDefault();
   });
+
   $("#espresso-menu-submit-button").addEventListener("click", () => {
     addEspressoMenuName();
   });
+
   $("#espresso-menu-name").addEventListener("keypress", (e) => {
     if (e.key !== "Enter") {
       return false;
     }
     if (e.key === "Enter") {
       addEspressoMenuName();
+    }
+  });
+
+  $("#espresso-menu-list").addEventListener("click", (e) => {
+    if (e.target.classList.contains("menu-edit-button")) {
+      const $menuName = e.target.closest("li").querySelector(".menu-name");
+      const menuName = $menuName.innerText;
+      const newName = prompt("수정말 메뉴명을 입력해주세요", menuName);
+      $menuName.innerText = newName;
     }
   });
 }
